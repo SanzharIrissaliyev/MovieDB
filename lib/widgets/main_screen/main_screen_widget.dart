@@ -10,15 +10,6 @@ class MainScreenWidget extends StatefulWidget {
 }
 
 class _MainScreenWidgetState extends State<MainScreenWidget> {
-  static const List<Widget> _widgetOptins = <Widget>[
-    Text(
-      "Новости",
-    ),
-    MovieListWidget(),
-    Text(
-      "Сериалы",
-    ),
-  ];
   int _selectedTab = 0;
   void onSelectedTab(int index) {
     if (_selectedTab == index) return;
@@ -35,8 +26,18 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           "TMDB",
         ),
       ),
-      body: Center(
-        child: _widgetOptins[_selectedTab],
+      body: IndexedStack(
+        //pozisia skrollera
+        index: _selectedTab,
+        children: [
+          Text(
+            "Новости",
+          ),
+          MovieListWidget(),
+          Text(
+            "Сериалы",
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedTab,

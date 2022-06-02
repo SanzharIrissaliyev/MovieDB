@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:themovedb/Theme/app_colors.dart';
 import 'package:themovedb/widgets/auth/auth_widget.dart';
 import 'package:themovedb/widgets/main_screen/main_screen_widget.dart';
+import 'package:themovedb/widgets/movie_details/movie_details_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,6 +30,11 @@ class MyApp extends StatelessWidget {
       routes: {
         '/auth': (context) => AuthWidget(),
         '/main_screen': (context) => MainScreenWidget(),
+        '/main_screen/movie_details': (context) {
+          final id = ModalRoute.of(context)!.settings.arguments as int;
+          print(id);
+          return MovieDetailsWidget(movieId: id);
+        },
       },
       initialRoute: '/auth',
     );
