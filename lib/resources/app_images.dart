@@ -18,5 +18,6 @@ class AppImages {
   static const String film7 = 'images/film7.png';
   static const String film8 = 'images/film8.png';
   static const String film9 = 'images/film9.png';
+  static const String qwedf = 'images/qwedf.png';
   static const String liamnison = 'images/liamnison.jpeg';
 }

@@ -1,46 +1,12 @@
-// ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
-import 'package:themovedb/Theme/app_colors.dart';
-import 'package:themovedb/widgets/auth/auth_widget.dart';
-import 'package:themovedb/widgets/main_screen/main_screen_widget.dart';
-import 'package:themovedb/widgets/movie_details/movie_details_widget.dart';
+import 'package:themovedb/ui/widgets/app/my_app_model.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+import 'ui/widgets/app/my_app.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          backgroundColor: AppColors.mainDarkBlue,
-        ),
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: AppColors.mainDarkBlue,
-          selectedItemColor: Color(0xFF01B4E4),
-          unselectedItemColor: Colors.grey,
-        ),
-      ),
-      routes: {
-        '/auth': (context) => AuthWidget(),
-        '/main_screen': (context) => MainScreenWidget(),
-
-        // id kino
-        '/main_screen/movie_details': (context) {
-          final arguments = ModalRoute.of(context)?.settings.arguments;
-          if (arguments is int) {
-            return MovieDetailsWidget(movieId: arguments);
-          } else
-            return MovieDetailsWidget(movieId: 0);
-        },
-      },
-      initialRoute: '/auth',
-    );
-  }
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final model = MyAppModel();
+  model.checkAuth;
+  final app = MyApp(model: model);
+  runApp(app);
 }
