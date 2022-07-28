@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:themovedb/domain/data_providers/session_data_providers.dart';
+import 'package:themovedb/libruary/widgets/inherited/provider.dart';
+import 'package:themovedb/ui/widgets/main_screen/main_screen_model.dart';
+import 'package:themovedb/ui/widgets/movie_list/movie_list_model.dart';
 
 import '../../../resources/resources.dart';
 
@@ -15,6 +18,7 @@ class MainScreenWidget extends StatefulWidget {
 
 class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 0;
+  final movielistModel = MovieListModel();
   void onSelectedTab(int index) {
     if (_selectedTab == index) return;
     setState(() {
@@ -23,7 +27,19 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    movielistModel.setupLocale(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final model = NotifierProvider.read<MainScreenModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Image(
@@ -41,10 +57,13 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
       body: IndexedStack(
         //pozisia skrollera
         index: _selectedTab,
-        children: const [
-          MainNewsWidget(),
-          MovieListWidget(),
-          Text(
+        children: [
+          const MainNewsWidget(),
+          NotifierProvider(
+            model: movielistModel,
+            child: const MovieListWidget(),
+          ),
+          const Text(
             "Сериалы",
           ),
         ],

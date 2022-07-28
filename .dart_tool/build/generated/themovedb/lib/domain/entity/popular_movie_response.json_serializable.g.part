@@ -1,0 +1,19 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+PopularMovieResponse _$PopularMovieResponseFromJson(
+        Map<String, dynamic> json) =>
+    PopularMovieResponse(
+      page: json['page'] as int,
+      totalResults: json['results'] as int,
+      totalPages: json['total_pages'] as int,
+    );
+
+Map<String, dynamic> _$PopularMovieResponseToJson(
+        PopularMovieResponse instance) =>
+    <String, dynamic>{
+      'page': instance.page,
+      'results': instance.totalResults,
+      'total_pages': instance.totalPages,
+    };
